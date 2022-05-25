@@ -6,19 +6,34 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - run: pip install --upgrade pip wheel
-      - run: pip install bandit black codespell flake8 flake8-bugbear flake8-comprehensions isort
-      - run: bandit --recursive  --skip B105,B108,B404,B603,B607 .
+      - uses: ad-m/github-push-action@master
+      - name: Run install
+        - run: pip install --upgrade pip wheel
+        - run: pip install bandit black codespell flake8 flake8-bugbear flake8-comprehensions isort
+        - run: bandit --recursive  --skip B105,B108,B404,B603,B607 .
       #- run: black --check --diff --line-length 79 .
       #- run: codespell
       #- run: flake8 . --count --max-complexity=16 --max-line-length=79
       #                --show-source --statistics
       #- run: isort --check-only --line-length 79 --profile black .
-      - run: isort --profile black .
-      - run: git status
-      - run: git add .
-      - run: git commit -m 'isort black check'
-      - run: git push
+      - name: Run checks
+        - run: isort --profile black .
+      #- name: Commit changes  
+#        - run: git status
+#        - run: git add .
+#        - run: git commit -m 'isort black check'
+#        - run: git push
+#        
+#      - name: Commit files # transfer the new html files back into the repository
+#            run: |
+#            git config --local user.name "jpadfield"
+#        git add ./docs
+#        git commit -m "Updating the repository GitHub html pages in the docs folder"
+#      - name: Push changes # push the output folder to your repo
+#        uses: ad-m/github-push-action@master
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          force: true
       # - run: pip install -r tubearchivist/requirements.txt
       # - run: mkdir --parents --verbose .mypy_cache
       # - run: mypy --ignore-missing-imports --install-types --non-interactive .
