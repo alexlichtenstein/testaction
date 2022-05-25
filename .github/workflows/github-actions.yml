@@ -16,6 +16,9 @@ jobs:
       #- run: isort --check-only --line-length 79 --profile black .
       - run: isort --profile black .
       - run: git status
+      - run: git add .
+      - run: git commit -m 'isort black check'
+      - run: git push
       # - run: pip install -r tubearchivist/requirements.txt
       # - run: mkdir --parents --verbose .mypy_cache
       # - run: mypy --ignore-missing-imports --install-types --non-interactive .
