@@ -1,8 +1,3 @@
-workflow "Lint on Push" {
-  on = "push"
-  resolves = ["Lint"]
-}
+name: Python Lint (isort/black)
+uses: wrboyce/python-lint-action@v1.0.0
 
-action "Lint" {
-  uses = "wrboyce/python-lint-action@master"
-}
